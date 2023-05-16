@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClashRoyaleController;
 use App\Http\Controllers\HostioController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,5 @@ Route::get('/', function () {
 Route::get('/getDomainsByIp', [HostioController::class, 'getDomainsByIp']);
 Route::get('/getAll', [HostioController::class, 'getAll']);
 Route::get('/getByField', [HostioController::class, 'getByField']);
+
+Route::get('/getPlayer', [ClashRoyaleController::class, 'getPlayer']);
