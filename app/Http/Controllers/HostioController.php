@@ -9,12 +9,9 @@ use Illuminate\Http\Request;
 class HostioController extends Controller
 {
     /*
-    * ENDPOINT (QUERYPARAMS -> IP | limit (1 o 5) | page )
+    * ENDPOINT (QUERYPARAMS -> IP | limit (1 o 5) | page | token )
     * http://127.0.0.1:8000/getDomainsByIp?ip=8.8.8.8&limit=10&page=2
     */
-
-    //https://host.io/api/full/stucom.com?&token=8cd72f876a8c4f
-
     public function getDomainsByIp()
     {
         $ip = request()->query("ip");
@@ -35,24 +32,21 @@ class HostioController extends Controller
 
         ]);
 
-        //json_decode($response->getBody()->getContents());
         $result = json_decode($response->getBody());
 
         return $result;
     }
 
+    /*
+    * ENDPOINT
+    * http://127.0.0.1:8000/getAll?domain=google.com
+    */
     public function getAll()
     {
         $domain = request()->query("domain");
-        $limit = request()->query("limit");
-        $page = request()->query("page");
 
         $client = new Client();
         $response = $client->request("GET", "https://host.io/api/full/$domain", [
-            "query" => [
-                "limit" => $limit,
-                "page" => $page
-            ],
             "headers" => [
                 'accept' => 'application/json',
                 "Authorization" => "Bearer " . env("API_KEY_COINRANKING")
@@ -60,12 +54,16 @@ class HostioController extends Controller
 
         ]);
 
-        //json_decode($response->getBody()->getContents());
         $result = json_decode($response->getBody());
 
         return $result;
     }
 
+
+    /*
+    * ENDPOINT ( QUERYPARAMS -> field (en la lista del readme) | value | limit ( 1 o 5) | page)
+    * http://127.0.0.1:8000/getByField?field=email&value=google@gmail.com?page=1&limit=5
+    */
     public function getByField()
     {
         $page = request()->query("page");
@@ -90,5 +88,4 @@ class HostioController extends Controller
 
         return $result;
     }
-    
 }
