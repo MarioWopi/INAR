@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CoinRankingController;
+use App\Http\Controllers\HostioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/getDomainsByIp', [CoinRankingController::class, 'getDomainsByIp']);
+Route::get('/getDomainsByIp', [HostioController::class, 'getDomainsByIp']);
+Route::get('/getAll', [HostioController::class, 'getAll']);
+Route::get('/getByField', [HostioController::class, 'getByField']);

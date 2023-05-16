@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
-class CoinRankingController extends Controller
+class HostioController extends Controller
 {
     /*
     * ENDPOINT (QUERYPARAMS -> IP | limit (1 o 5) | page )
@@ -41,15 +41,14 @@ class CoinRankingController extends Controller
         return $result;
     }
 
-    public function getAllByDomain()
+    public function getAll()
     {
-        $ip = request()->query("ip");
+        $domain = request()->query("domain");
         $limit = request()->query("limit");
         $page = request()->query("page");
 
-
         $client = new Client();
-        $response = $client->request("GET", "https://host.io/api/domains/ip/$ip", [
+        $response = $client->request("GET", "https://host.io/api/full/$domain", [
             "query" => [
                 "limit" => $limit,
                 "page" => $page
@@ -67,4 +66,29 @@ class CoinRankingController extends Controller
         return $result;
     }
 
+    public function getByField()
+    {
+        $page = request()->query("page");
+        $field = request()->query("field");
+        $value = request()->query("value");
+        $limit = request()->query("limit");
+
+        $client = new Client();
+        $response = $client->request("GET", "https://host.io/api/domains/$field/$value", [
+            "query" => [
+                "page" => $page,
+                "limit" => $limit
+            ],
+            "headers" => [
+                'accept' => 'application/json',
+                "Authorization" => "Bearer " . env("API_KEY_COINRANKING")
+            ]
+        ]);
+
+        //json_decode($response->getBody()->getContents());
+        $result = json_decode($response->getBody());
+
+        return $result;
+    }
+    
 }
