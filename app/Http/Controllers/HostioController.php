@@ -27,7 +27,7 @@ class HostioController extends Controller
             ],
             "headers" => [
                 'accept' => 'application/json',
-                "Authorization" => "Bearer " . env("API_KEY_COINRANKING")
+                "Authorization" => "Bearer " . env("API_KEY_HOSTIO")
             ]
 
         ]);
@@ -49,7 +49,7 @@ class HostioController extends Controller
         $response = $client->request("GET", "https://host.io/api/full/$domain", [
             "headers" => [
                 'accept' => 'application/json',
-                "Authorization" => "Bearer " . env("API_KEY_COINRANKING")
+                "Authorization" => "Bearer " . env("API_KEY_HOSTIO")
             ]
 
         ]);
@@ -79,7 +79,7 @@ class HostioController extends Controller
             ],
             "headers" => [
                 'accept' => 'application/json',
-                "Authorization" => "Bearer " . env("API_KEY_COINRANKING")
+                "Authorization" => "Bearer " . env("API_KEY_HOSTIO")
             ]
         ]);
 
