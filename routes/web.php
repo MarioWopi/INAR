@@ -23,4 +23,6 @@ Route::get('/getDomainsByIp', [HostioController::class, 'getDomainsByIp']);
 Route::get('/getAll', [HostioController::class, 'getAll']);
 Route::get('/getByField', [HostioController::class, 'getByField']);
 
-Route::get('/getPlayer', [ClashRoyaleController::class, 'getPlayer']);
+Route::get('/getPlayerByUserTag', [ClashRoyaleController::class, 'getPlayerByUserTag']);
+Route::get('/getClans', [ClashRoyaleController::class, 'getClans']);
+Route::get('/getLocations', [ClashRoyaleController::class, 'getLocations']);
