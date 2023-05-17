@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClashRoyaleController;
 use App\Http\Controllers\HostioController;
 use Illuminate\Support\Facades\Route;
